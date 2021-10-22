@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InitGame : MonoBehaviour {
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         var data = GameObject.FindGameObjectWithTag("Data");
         if (data == null)
         {

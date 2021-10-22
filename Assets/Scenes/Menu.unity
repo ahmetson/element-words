@@ -203,7 +203,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 60494589}
   m_OnClick:
     m_PersistentCalls:
@@ -736,6 +736,7 @@ GameObject:
   - component: {fileID: 343003621}
   - component: {fileID: 343003623}
   - component: {fileID: 343003622}
+  - component: {fileID: 343003624}
   m_Layer: 0
   m_Name: MainPanel
   m_TagString: Untagged
@@ -805,6 +806,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343003620}
   m_CullTransparentMesh: 0
+--- !u!114 &343003624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343003620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83cbcac4c14c2374b8bf917273cf156a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayButton: {fileID: 1957253514}
+  ImportButton: {fileID: 689698690}
+  CreateButton: {fileID: 1142626417}
 --- !u!1 &428831372
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,7 +4320,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1325664521}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
-        m_MethodName: ShowMain
+        m_MethodName: ShowCentralizedNetwork
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4780,7 +4796,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1965411942}
   m_OnClick:
     m_PersistentCalls:

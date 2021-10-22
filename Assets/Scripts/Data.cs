@@ -12,8 +12,17 @@ public class Data : MonoBehaviour {
 
     public KeyPair KeyPair;
 
+    public enum NETWORK_TYPE
+    {
+        ETHEREUM,
+        NEO,
+        CENTRALIZED
+    }
+
+    public NETWORK_TYPE NetworkType;
+
     // Use this for initialization
-    void Start () {
+    void Awake() {
         Items = new Dictionary<string, int>();
 
         LoadData();
@@ -72,6 +81,4 @@ public class Data : MonoBehaviour {
     {
         Items.Add(key, value);  
     }
-
-    
 }

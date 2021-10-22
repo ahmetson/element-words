@@ -7,6 +7,12 @@ public class Menu : MonoBehaviour {
     public GameObject ImportPanel;
     public GameObject CreatePanel;
 
+    private Data data;
+    void Start()
+    {
+        data = GameObject.FindGameObjectWithTag("Data").GetComponent<Data>();
+    }
+    
     public void ExitGame()
     {
         Application.Quit();
@@ -51,5 +57,11 @@ public class Menu : MonoBehaviour {
     public void ShowProfile()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Profile");
+    }
+
+    public void ShowCentralizedNetwork()
+    {
+        data.NetworkType = Data.NETWORK_TYPE.CENTRALIZED;
+        ShowMain();
     }
 }
