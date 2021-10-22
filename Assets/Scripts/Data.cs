@@ -36,7 +36,7 @@ public class Data : MonoBehaviour {
 
     void LoadData()
     {
-        var data = PlayerPrefs.GetString("Items", "");
+        var data = PlayerPrefs.GetString(GetItemsKey(), "");
 
         if (string.IsNullOrEmpty(data))
         {
@@ -57,13 +57,18 @@ public class Data : MonoBehaviour {
     {
         var items = string.Join(";", Items.Keys);
 
-        PlayerPrefs.SetString("Items", items);
+        PlayerPrefs.SetString(GetItemsKey(), items);
         
 
         foreach(var item in Items)
         {
             PlayerPrefs.SetInt(item.Key, item.Value);
         }
+    }
+
+    string GetItemsKey()
+    {
+        return NetworkType.ToString() + "_items";
     }
 	
 	// Update is called once per frame
