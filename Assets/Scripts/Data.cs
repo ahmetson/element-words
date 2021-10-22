@@ -12,6 +12,8 @@ public class Data : MonoBehaviour {
 
     public KeyPair KeyPair;
 
+    public string UserAddress;
+
     public enum NETWORK_TYPE
     {
         ETHEREUM,
@@ -27,6 +29,9 @@ public class Data : MonoBehaviour {
 
         LoadData();
         DontDestroyOnLoad(gameObject);
+
+        // Default User Address
+        UserAddress = "Player01";
 	}
 
     private void OnDestroy()
@@ -68,7 +73,7 @@ public class Data : MonoBehaviour {
 
     string GetItemsKey()
     {
-        return NetworkType.ToString() + "_items";
+        return NetworkType.ToString() + UserAddress + "Items";
     }
 	
 	// Update is called once per frame
