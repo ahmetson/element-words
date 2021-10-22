@@ -32,6 +32,11 @@ public class Profile : MonoBehaviour {
         UnityEngine.SceneManagement.SceneManager.LoadScene("Battle");
     }
 
+    public void ShowMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    }
+
     public void ShowItemListPanel()
     {
         var children = new List<GameObject>();

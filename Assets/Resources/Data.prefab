@@ -1,25 +1,14 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &100100000
-Prefab:
-  m_ObjectHideFlags: 1
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications: []
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1607711712065674}
-  m_IsPrefabAsset: 1
 --- !u!1 &1607711712065674
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4624694576305492}
-  - component: {fileID: 114687388167312938}
   - component: {fileID: 114430567195907540}
   m_Layer: 0
   m_Name: Data
@@ -30,9 +19,10 @@ GameObject:
   m_IsActive: 1
 --- !u!4 &4624694576305492
 Transform:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607711712065674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 416.35995, y: 148.65337, z: -14.125}
@@ -43,24 +33,10 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114430567195907540
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1607711712065674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f76229bc138650f4b92a982aa94a2802, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WaitingPanelPrefab: {fileID: 1893585730933926, guid: 3afd57323472d624b877ce5f68b51b0b,
-    type: 2}
-  Data: {fileID: 114687388167312938}
-  ElementContractAddress: 5b6bea6111a0c35da9b7d2873af9294acb23c2fd
---- !u!114 &114687388167312938
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607711712065674}
   m_Enabled: 1
   m_EditorHideFlags: 0

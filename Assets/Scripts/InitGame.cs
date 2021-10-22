@@ -8,7 +8,6 @@ public class InitGame : MonoBehaviour {
         var data = GameObject.FindGameObjectWithTag("Data");
         if (data == null)
         {
-
             var o = Resources.Load("Data") as GameObject;
             Instantiate(o);
             return;
