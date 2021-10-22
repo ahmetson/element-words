@@ -209,8 +209,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1325664521}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowProfile
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ShowMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3078,6 +3078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f631c01740560448b2a209011fef07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlockchainPanel: {fileID: 879880081}
   MainPanel: {fileID: 343003620}
   ImportPanel: {fileID: 1954076237}
   CreatePanel: {fileID: 2011359446}
@@ -3120,7 +3121,7 @@ GameObject:
   - component: {fileID: 1363996936}
   - component: {fileID: 1363996935}
   m_Layer: 0
-  m_Name: ExitButton
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3192,8 +3193,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1325664521}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ExitGame
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ShowBlockchain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4786,8 +4787,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1325664521}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowCreate
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ShowMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
