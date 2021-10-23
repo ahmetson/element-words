@@ -61,7 +61,8 @@ public class Menu : MonoBehaviour {
 
     public void ShowCentralizedNetwork()
     {
-        data.NetworkType = Data.NETWORK_TYPE.CENTRALIZED;
+        data.Init(Data.NETWORK_TYPE.CENTRALIZED);
+
         ShowMain();
     }
 }

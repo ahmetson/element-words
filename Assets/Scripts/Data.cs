@@ -27,7 +27,6 @@ public class Data : MonoBehaviour {
     void Awake() {
         Items = new Dictionary<string, int>();
 
-        LoadData();
         DontDestroyOnLoad(gameObject);
 
         // Default User Address
@@ -39,8 +38,17 @@ public class Data : MonoBehaviour {
         SaveData();
     }
 
-    void LoadData()
+    public void Init(Data.NETWORK_TYPE newNetworkType)
     {
+        NetworkType = newNetworkType;
+        LoadData();
+    }
+
+    public void LoadData()
+    {
+        string prefix = GetItemsKey();
+        Debug.Log(prefix + " to load data");
+
         var data = PlayerPrefs.GetString(GetItemsKey(), "");
 
         if (string.IsNullOrEmpty(data))
@@ -48,11 +56,12 @@ public class Data : MonoBehaviour {
             return;
         }
 
+
         var items = data.Split(';');
 
         foreach(var name in items)
         {
-            var value = PlayerPrefs.GetInt(name, 0);
+            var value = PlayerPrefs.GetInt(prefix + "-" + name, 0);
 
             Items.Add(name, value);
         }
@@ -62,13 +71,17 @@ public class Data : MonoBehaviour {
     {
         var items = string.Join(";", Items.Keys);
 
-        PlayerPrefs.SetString(GetItemsKey(), items);
-        
+        string prefix = GetItemsKey();
+        Debug.Log(prefix + " to save data");
+
+        PlayerPrefs.SetString(GetItemsKey(), items);        
 
         foreach(var item in Items)
         {
-            PlayerPrefs.SetInt(item.Key, item.Value);
+            PlayerPrefs.SetInt(prefix + "-" + item.Key, item.Value);
         }
+
+        PlayerPrefs.Save();
     }
 
     string GetItemsKey()

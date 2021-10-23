@@ -87,4 +87,23 @@ public class Profile : MonoBehaviour {
         ShowItemListPanel();
     }
 
+    public void CreateItem()
+    {
+        if (NewItemName.text.Length < 1)
+        {
+            Debug.LogError("Write the element name");
+            return;
+        }
+
+        int weight = Random.Range(1, 5);
+
+        string key = (NewItemElement.options[NewItemElement.value]).text + "-" + NewItemName.text;
+
+        data.CreateItem(key, weight);
+
+        NewItemElement.value = 0;
+        NewItemName.text = "";
+
+        ShowItemListPanel();
+    }
 }
