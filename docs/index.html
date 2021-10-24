@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Element Words</title>
+    <title>Unity WebGL Player | ElementWordsTest</title>
     <link rel="shortcut icon" href="TemplateData/favicon.ico">
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
@@ -22,20 +22,20 @@
       <div id="unity-footer">
         <div id="unity-webgl-logo"></div>
         <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Element Words</div>
+        <div id="unity-build-title">ElementWordsTest</div>
       </div>
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Web.loader.js";
+      var loaderUrl = buildUrl + "/docs.loader.js";
       var config = {
-        dataUrl: buildUrl + "/Web.data.gz",
-        frameworkUrl: buildUrl + "/Web.framework.js.gz",
-        codeUrl: buildUrl + "/Web.wasm.gz",
+        dataUrl: buildUrl + "/docs.data",
+        frameworkUrl: buildUrl + "/docs.framework.js",
+        codeUrl: buildUrl + "/docs.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "Ahmetson",
-        productName: "Element Words",
-        productVersion: "0.0.1",
+        companyName: "DefaultCompany",
+        productName: "ElementWordsTest",
+        productVersion: "0.1",
       };
 
       var container = document.querySelector("#unity-container");
