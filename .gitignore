@@ -35,3 +35,16 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Logs
+
+# Not related to the Web3 gl
+[Aa]ssets/
+[Ll]ogs/
+[Oo]bj/
+[Pp]ackages/
+[Pp]rojectSettings/
+[Rr]awAssets/
+[Tt]emp/
+[Uu]serSettings
+.vsconfig
+Assembly-CSharp.csproj
+element-words.sln
