@@ -47,9 +47,10 @@ public class Data : MonoBehaviour {
     public void LoadData()
     {
         string prefix = GetItemsKey();
-        Debug.Log(prefix + " to load data");
 
         var data = PlayerPrefs.GetString(GetItemsKey(), "");
+
+        Items.Clear();
 
         if (string.IsNullOrEmpty(data))
         {
@@ -72,7 +73,6 @@ public class Data : MonoBehaviour {
         var items = string.Join(";", Items.Keys);
 
         string prefix = GetItemsKey();
-        Debug.Log(prefix + " to save data");
 
         PlayerPrefs.SetString(GetItemsKey(), items);        
 
@@ -98,10 +98,12 @@ public class Data : MonoBehaviour {
     public void RemoveItem(string key)
     {
         Items.Remove(key);
+        SaveData();
     }
 
     public void CreateItem(string key, int value)
     {
-        Items.Add(key, value);  
+        Items.Add(key, value);
+        SaveData();
     }
 }

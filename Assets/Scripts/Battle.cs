@@ -44,21 +44,22 @@ public class Battle : MonoBehaviour {
     public GameObject WaterPrefab;
 
     private Data data;
-    private GameObject opponent;
-    private GameObject player;
 
     private Coroutine timer;
 
-	// Use this for initialization
-	void Start () {
+    private ElementItem opponentElement;
+    private ElementItem playerElement;
+    private int reward;
+
+    // Use this for initialization
+    void Start () {
         data = GameObject.FindGameObjectWithTag("Data").GetComponent<Data>();
 
         SelectedItemText.SetText("");
         ErrorText.SetText("");
 
         CancelButton.interactable = false;
-        opponent = null;
-        player = null;
+        reward = -1;
 
         // Clear and show everything from the Item's List
         ShowSelectableItemList();
@@ -86,6 +87,7 @@ public class Battle : MonoBehaviour {
         }
         else
         {
+            StartBattle();
             timer = null;
         }
     }
@@ -123,9 +125,227 @@ public class Battle : MonoBehaviour {
         BattlePanel.SetActive(false);
     }
 
+    public ElementItem GetElementFromMessage(string neededMessage)
+    {
+        foreach (var item in data.Items)
+        {
+            var message = item.Key + " +" + item.Value;
+            if (message.Equals(neededMessage))
+            {
+                return new ElementItem(item.Key, item.Value);
+            }
+        }
+
+        return null;
+    }
+
     public void SelectItem(GameObject item, string message)
     {
         SelectedItemText.SetText(message);
         ErrorText.SetText("");
+    }
+
+    public void StartBattle()
+    {
+        if (SelectedItemText.text.Length < 1)
+        {
+            ErrorText.SetText("Please, select an element word");
+            return;
+        }
+
+        if (timer != null)
+        {
+            // Stop the timer
+            StopCoroutine(timer);
+        }
+
+        // Create random element for the opponent
+        opponentElement = CreateRandomItem();
+        playerElement = GetElementFromMessage(SelectedItemText.text);
+
+        // Show elements on the battle board
+        int childs = BattleScene.childCount;
+        for (int i = childs - 1; i > 0; i--)
+        {
+            DestroyImmediate(BattleScene.GetChild(i).gameObject);
+        }
+        InstantiniateItem(opponentElement);
+        InstantiniateItem(playerElement);
+
+        ItemListPanel.SetActive(false);
+        BattlePanel.SetActive(true);
+
+        StartCoroutine("Calculation");
+    }
+
+    private ElementItem CreateRandomItem()
+    {
+        string name = "word";
+        int newValue = Random.Range(0, 4);
+
+        string[] elements = new string[4];
+        elements[0] = "Fire";
+        elements[1] = "Water";
+        elements[2] = "Wind";
+        elements[3] = "Ground";
+
+        string key = elements[newValue] + "-" + name;
+
+        var value = Random.Range(1, 100);
+
+        return new ElementItem(key, value);
+    }
+
+    private void GetBattleResult(out string result)
+    {
+        result = "";
+        if (opponentElement.Key.StartsWith("Water")) 
+        {
+            if (playerElement.Key.StartsWith("Water"))
+            {
+                result = "Water Crashes Water!";
+                reward = 1;
+            }
+            else if (playerElement.Key.StartsWith("Fire"))
+            {
+                result = "Water Extinguishes Fire!";
+                reward = -1;
+            }
+            else if (playerElement.Key.StartsWith("Wind"))
+            {
+                result = "Wind freezes Water!";
+                reward = opponentElement.Value;
+            }
+            else
+            {
+                result = "Draw";
+                reward = 0;
+            }
+        }
+        else if (opponentElement.Key.StartsWith("Fire"))
+        {
+            if (playerElement.Key.StartsWith("Fire"))
+            {
+                result = "Fire Crashes Fire!";
+                reward = 1;
+            }
+            else if (playerElement.Key.StartsWith("Ground"))
+            {
+                result = "Fire Melts Ground!";
+                reward = -1;
+            }
+            else if (playerElement.Key.StartsWith("Water"))
+            {
+                result = "Water Extinguishes Fire!";
+                reward = opponentElement.Value;
+            }
+            else
+            {
+                result = "Draw";
+                reward = 0;
+            }
+        }
+        else if (opponentElement.Key.StartsWith("Ground"))
+        {
+            if (playerElement.Key.StartsWith("Ground"))
+            {
+                result = "Ground Crashes Ground!";
+                reward = 1;
+            }
+            else if (playerElement.Key.StartsWith("Wind"))
+            {
+                result = "Ground Stops Wind!";
+                reward = -1;
+            }
+            else if (playerElement.Key.StartsWith("Fire"))
+            {
+                result = "Fire Melts Ground!";
+                reward = opponentElement.Value;
+            }
+            else
+            {
+                result = "Draw";
+                reward = 0;
+            }
+        }
+        else if (opponentElement.Key.StartsWith("Wind"))
+        {
+            if (playerElement.Key.StartsWith("Wind"))
+            {
+                result = "Wind Crashes Wind!";
+                reward = 1;
+            }
+            else if (playerElement.Key.StartsWith("Water"))
+            {
+                result = "Wind Freezes Water!";
+                reward = -1;
+            }
+            else if (playerElement.Key.StartsWith("Ground"))
+            {
+                result =  "Ground Stops Wind!";
+                reward = opponentElement.Value;
+            }
+            else
+            {
+                result = "Draw";
+                reward = 0;
+            }
+        }
+    }
+
+    private void RewardPlayer()
+    {
+        if (reward == -1)
+        {
+            data.RemoveItem(playerElement.Key);
+        }
+        else if (reward > 0)
+        {
+            data.UpdateData(playerElement.Key, playerElement.Value + reward);
+        }
+    }
+
+    IEnumerator Calculation()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        // Calculate the Battle outcome
+        string resultMessage = "";
+        GetBattleResult(out resultMessage);
+
+        ElementReactionText.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText(resultMessage);
+
+        yield return new WaitForSeconds(1.5f);
+
+        ElementReactionText.SetTrigger("Show");
+
+        RewardPlayer();
+
+        yield return new WaitForSeconds(1.5f);
+
+        CancelButton.interactable = true;
+    }
+
+    public void InstantiniateItem(ElementItem opponentData)
+    {
+        GameObject item = new GameObject();
+        if (opponentData.Key.StartsWith("Ground"))
+        {
+            item = Instantiate(GroundPrefab, BattleScene);
+        }
+        else if (opponentData.Key.StartsWith("Wind"))
+        {
+            item = Instantiate(WindPrefab, BattleScene);
+        }
+        else if (opponentData.Key.StartsWith("Fire"))
+        {
+            item = Instantiate(FirePrefab, BattleScene);
+        }
+        else
+        {
+            item = Instantiate(WaterPrefab, BattleScene);
+        }
+
+        item.GetComponentInChildren<TextMeshProUGUI>().SetText(opponentData.Key);
     }
 }
